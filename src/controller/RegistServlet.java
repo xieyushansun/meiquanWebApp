@@ -17,13 +17,11 @@ import java.sql.Statement;
 @WebServlet(name = "RegistServlet", urlPatterns = "/RegistServlet")
 public class RegistServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("#####################################");
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         String passwordAgain = request.getParameter("passwordAgain");
-        System.out.println("########################"+"phone = "+phone+"password = "+password+"passwordAgain = "+passwordAgain);
         int flag = 0; //标志该号码是否已经被注册
         Writer writer = response.getWriter();
         Connection con = DBDAO.getConnection();
@@ -54,18 +52,14 @@ public class RegistServlet extends HttpServlet {
                 if (result == 1) {
                     writer.write("3"); //注册成功
                 }
-
             }
-
             writer.close();
             statement.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

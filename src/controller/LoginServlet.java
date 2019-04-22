@@ -21,26 +21,8 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
         String password = request.getParameter("password");
 
         Connection connection = DBDAO.getConnection();
-        /*try {
-            Statement statement = connection.createStatement();
-            String sql = String.format("insert into user(phone, password) values('%s', '%s');", phone, password);
-            int result = statement.executeUpdate(sql); //返回值为受影响行数
-            if (result == 1)
-            {
-                Writer writer = response.getWriter();
-                writer.write("成功插入" + result + "条数据");
-                writer.flush();
-                writer.close();
-            }
 
-            statement.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        */
-        String sql = String.format("select phone, password from user where phone=%s", phone);
+        String sql = String.format("select phone, password from user where phone='%s';", phone);
         String phonequery;
         String passwordquery;
         Writer writer = response.getWriter();
