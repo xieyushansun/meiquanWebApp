@@ -41,8 +41,7 @@ public class FirstRegisterServlet extends HttpServlet {
         Connection connection = DBDAO.getConnection();
         try {
             Statement statement = connection.createStatement();
-            String sql = String.format("update user set birth='%s', type='%s', sex='%s', province='%s', city='%s', height='%s', weight='%s'" +
-                    " where phone='%s';", birth, type, sex, province, city, height, weight, phone);
+            String sql = String.format("update user set birth='%s', type='%s', sex='%s', province='%s', city='%s', height='%s', weight='%s' where phone='%s';", birth, type, sex, province, city, height, weight, phone);
             int n = statement.executeUpdate(sql);
             if (n == 1){
                 writer.write("1");  //成功插入
