@@ -20,6 +20,7 @@ public class FoodRecordServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         String foodname = request.getParameter("foodname");
         String foodwhen = request.getParameter("foodwhen");
+        String phone = request.getParameter("phone");
         int intake = Integer.valueOf(request.getParameter("intake"));
 
         String str_intake = String.valueOf(intake); //将摄入量转换为String类型
@@ -28,7 +29,7 @@ public class FoodRecordServlet extends HttpServlet {
         Connection connection = DBDAO.getConnection();
         try {
             Statement statement = connection.createStatement();
-            String sql = String.format("insert into foodrecord(foodname, intake, foodwhen) VALUES('%s', %s, '%s');", foodname, str_intake, foodwhen);
+            String sql = String.format("insert into foodrecord(phone, foodname, intake, foodwhen) VALUES('%s', '%s', %s, '%s');",phone, foodname, str_intake, foodwhen);
             int n = statement.executeUpdate(sql);
             if (n == 1){
                 writer.write("1");  //如果成功插入一条记录就返回1
