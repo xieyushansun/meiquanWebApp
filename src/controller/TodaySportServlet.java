@@ -41,8 +41,8 @@ public class TodaySportServlet extends HttpServlet {
             String sql = "select * from sportrecord a join sportcalory b on a.sportname = b.sportname where DATE_FORMAT(date,'%Y-%m-%d') = CURDATE() and phone='"+phone+"';";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                sportname = resultSet.getString("foodname");
-                sportwhen = resultSet.getString("foodwhen");
+                sportname = resultSet.getString("sportname");
+                sportwhen = resultSet.getString("sportwhen");
                 duration = resultSet.getDouble("duration");
                 calory = resultSet.getInt("calory");
                 switch (sportwhen){

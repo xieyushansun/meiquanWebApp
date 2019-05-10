@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.sql.Connection;
@@ -26,6 +27,7 @@ public class GetUserInfoServlet extends HttpServlet {
         String nickname = ""; //昵称
         Integer height = 0; //身高
         Integer weight = 0; //体重
+        String headimage_url = "";
         Connection connection = DBDAO.getConnection();
         try {
             Statement statement = connection.createStatement();
@@ -35,19 +37,29 @@ public class GetUserInfoServlet extends HttpServlet {
                 nickname = resultSet.getString("nickname");
                 height = resultSet.getInt("height");
                 weight = resultSet.getInt("weight");
+                headimage_url = resultSet.getString("headimage_url");
                 //........
             }
-            //System.out.println("##########################"+phone+height+weight+nickname);
-            Writer writer = response.getWriter();
+
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("nickname", nickname);
             jsonObject.addProperty("height", height);
             jsonObject.addProperty("weight", weight);
+            jsonObject.addProperty("headimage_url", headimage_url);
 
+            if (!headimage_url.isEmpty()){
+                File file = new File(headimage_url);
+                if (file.exists()){
+
+                }
+            }
+
+            Writer writer = response.getWriter();
             Gson gson = new Gson();
             writer.write(gson.toJson(jsonObject));
             writer.flush();
             writer.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
