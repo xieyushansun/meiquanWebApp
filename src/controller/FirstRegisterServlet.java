@@ -37,11 +37,22 @@ public class FirstRegisterServlet extends HttpServlet {
         String type = request.getParameter("type");
         String province = request.getParameter("province");
         String city = request.getParameter("city");
+        String sportintensity = request.getParameter("sportintensity");
+
+        switch (sportintensity){
+            case "A":sportintensity = "1.2";break;
+            case "B":sportintensity = "1.3";break;
+            case "C":sportintensity = "1.5";break;
+            case "D":sportintensity = "1.7";break;
+            case "E":sportintensity = "1.9";break;
+            default:break;
+        }
+
         Writer writer = response.getWriter();
         Connection connection = DBDAO.getConnection();
         try {
             Statement statement = connection.createStatement();
-            String sql = String.format("update user set birth='%s', type='%s', sex='%s', province='%s', city='%s', height='%s', weight='%s' where phone='%s';", birth, type, sex, province, city, height, weight, phone);
+            String sql = String.format("update user set birth='%s', type='%s', sex='%s', province='%s', city='%s', height='%s', weight='%s', sportintensity=%s where phone='%s';", birth, type, sex, province, city, height, weight, sportintensity, phone);
             int n = statement.executeUpdate(sql);
             if (n == 1){
                 writer.write("1");  //成功插入
