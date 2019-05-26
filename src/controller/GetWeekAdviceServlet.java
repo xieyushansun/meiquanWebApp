@@ -34,8 +34,12 @@ public class GetWeekAdviceServlet extends HttpServlet {
             grade = 0;
         }else if (i_totalcalory >= 1750 && i_totalcalory <= 2000){
             grade = 1;
-        }else if (i_totalcalory >= 2000){
+        }else if (i_totalcalory >= 2000 && i_totalcalory <= 2250){
             grade = 2;
+        }else if (i_totalcalory >= 2250 && i_totalcalory <= 2500){
+            grade = 3;
+        }else if (i_totalcalory >= 2500){
+            grade = 4;
         }
         Writer writer = response.getWriter();
         String foodname; //食物名称

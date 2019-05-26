@@ -27,6 +27,7 @@ public class FirstRegisterServlet extends HttpServlet {
         int birthday = Integer.valueOf(request.getParameter("birthday"));
         String type = request.getParameter("type");*/
         String phone = request.getParameter("phone");
+        String nickname = request.getParameter("nickname");
         String birthyear = request.getParameter("birthyear");
         String birthmonth = request.getParameter("birthmonth");
         String birthday = request.getParameter("birthday");
@@ -52,13 +53,16 @@ public class FirstRegisterServlet extends HttpServlet {
         Connection connection = DBDAO.getConnection();
         try {
             Statement statement = connection.createStatement();
-            String sql = String.format("update user set birth='%s', type='%s', sex='%s', province='%s', city='%s', height='%s', weight='%s', sportintensity=%s where phone='%s';", birth, type, sex, province, city, height, weight, sportintensity, phone);
+            String sql = String.format("update user set nickname='%s', birth='%s', type='%s', sex='%s', province='%s', city='%s', height='%s', weight='%s', sportintensity=%s where phone='%s';", nickname, birth, type, sex, province, city, height, weight, sportintensity, phone);
             int n = statement.executeUpdate(sql);
             if (n == 1){
                 writer.write("1");  //成功插入
             }else {
                 writer.write("0");  //失败
             }
+            String sql2 = String.format("insert into follow(phone, followphone) values('%s', '%s');", phone, phone);
+            statement.executeUpdate(sql2);
+
             writer.close();
             statement.close();
             connection.close();

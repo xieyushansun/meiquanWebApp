@@ -101,8 +101,9 @@ public class GetFoodNutrientServlet extends HttpServlet {
                 jsonObject.addProperty("number", iron+"毫克");
                 detail_jsonObjectList.add(jsonObject);
 
-                writer.write(detail_jsonObjectList.toString());
+
             }
+            writer.write(detail_jsonObjectList.toString());
             statement.close();
             connection.close();
             resultSet.close();

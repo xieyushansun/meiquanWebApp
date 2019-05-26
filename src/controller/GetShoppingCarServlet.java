@@ -31,10 +31,12 @@ public class GetShoppingCarServlet extends HttpServlet {
             String sql = String.format("select distinct * from shoppingcar_commodity where userphone = '%s';", userphone);
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
+                String id_commodity = resultSet.getString("id_commodity");
                 String commodity_name = resultSet.getString("commodity_name");
                 String price = resultSet.getString("price");
                 String commodity_imageurl = resultSet.getString("commodity_imageurl");
                 JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("id_commodity", id_commodity);
                 jsonObject.addProperty("commodity_name", commodity_name);
                 jsonObject.addProperty("price", price);
                 jsonObject.addProperty("commodity_imageurl", commodity_imageurl);
